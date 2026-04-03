@@ -6,6 +6,7 @@
   "scripts": {
     "serve": "python3 -m http.server 4173 --bind 127.0.0.1",
     "deck:new": "node scripts/generate-deck.mjs",
+    "vendor:setup": "sh scripts/setup-vendor-reveal.sh",
     "docker:build": "docker build -t curio-decks .",
     "docker:run": "docker run --rm -p 4173:80 --name curio-decks curio-decks"
   }
