@@ -1,0 +1,45 @@
+.reveal {
+  font-size: 34px;
+}
+
+.reveal .slides section {
+  text-align: left;
+}
+
+.reveal h1,
+.reveal h2 {
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+
+.reveal h1 {
+  color: #0b2a4a;
+}
+
+.reveal h2 {
+  color: #123b5f;
+}
+
+.reveal .tagline {
+  color: #0f5a7a;
+  font-weight: 700;
+}
+
+.reveal ul,
+.reveal ol {
+  margin-top: 0.5em;
+}
+
+.reveal li {
+  margin: 0.3em 0;
+}
+
+.reveal pre {
+  width: 100%;
+  box-shadow: none;
+  border: 1px solid #d9e6f2;
+}
+
+.reveal pre code {
+  max-height: 520px;
+}

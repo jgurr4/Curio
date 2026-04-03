@@ -1,0 +1,7 @@
+services:
+  curio-decks:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "4173:80"
