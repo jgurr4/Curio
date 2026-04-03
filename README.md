@@ -13,7 +13,7 @@ This workspace keeps presentation content in your project repo. `vendor/` is int
 ## Run the deck (Docker, recommended)
 
 ```bash
-cd /home/jared/repos/curio
+cd /path/to/cloned/curio
 docker build -t curio-decks .
 docker run --rm -p 4173:80 --name curio-decks curio-decks
 ```
@@ -32,7 +32,7 @@ Ctrl+C
 ## Run the deck (host fallback)
 
 ```bash
-cd /home/jared/repos/curio
+cd /path/to/cloned/curio
 npm run vendor:setup
 npm run serve
 ```
@@ -49,7 +49,7 @@ docker build --build-arg REVEAL_VERSION=5.2.1 -t curio-decks .
 ## Generate a new deck
 
 ```bash
-cd /home/jared/repos/curio
+cd /path/to/cloned/curio
 npm run deck:new -- q2-plan "Q2 Plan" "project-idea,sre-workflow,database-review"
 ```
 
