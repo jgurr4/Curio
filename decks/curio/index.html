@@ -3,142 +3,137 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Curio - Curated Internet Layer</title>
+    <title>Curio - The Intentional Internet Layer</title>
     <link rel="stylesheet" href="../../vendor/reveal.js/dist/reset.css" />
     <link rel="stylesheet" href="../../vendor/reveal.js/dist/reveal.css" />
     <link rel="stylesheet" href="../../vendor/reveal.js/dist/theme/white.css" />
     <link rel="stylesheet" href="../../vendor/reveal.js/plugin/highlight/monokai.css" />
-    <link rel="stylesheet" href="curio.css" />
+    <style>
+      :root {
+        --curio-dark: #0b2a4a;
+        --curio-blue: #123b5f;
+        --curio-accent: #0f5a7a;
+        --curio-calm: #f4f7f9;
+      }
+      .reveal { font-size: 32px; background-color: var(--curio-calm); }
+      .reveal .slides section { text-align: left; padding: 40px; }
+      .reveal h1, .reveal h2 { text-transform: none; letter-spacing: -0.02em; font-weight: 800; }
+      .reveal h1 { color: var(--curio-dark); font-size: 3.5em; }
+      .reveal h2 { color: var(--curio-blue); border-bottom: 3px solid var(--curio-accent); display: inline-block; margin-bottom: 0.5em; }
+      .reveal .tagline { color: var(--curio-accent); font-weight: 700; font-size: 1.2em; }
+      .reveal ul { list-style-type: '— '; }
+      .reveal li { margin: 0.5em 0; color: #333; }
+      .reveal pre { width: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-radius: 8px; }
+      .reveal .highlight-box { background: #e0ebf5; padding: 20px; border-left: 10px solid var(--curio-accent); margin: 20px 0; }
+      .reveal .strike { text-decoration: line-through; color: #999; }
+    </style>
   </head>
   <body>
     <div class="reveal">
       <div class="slides">
-        <section>
-          <h1>Curio</h1>
-          <p class="tagline">A curated internet layer, not a browser.</p>
-          <p>No browsing. No scrolling. Only intentional access.</p>
+        
+        <section data-background-color="#0b2a4a">
+          <h1 style="color: white;">Curio</h1>
+          <p class="tagline" style="color: #a8ddec;">The Internet is a Casino. <br>Curio is a Scalpel.</p>
+          <p style="color: #cbd5e0; font-size: 0.8em;">No scrolling. No algorithmic manipulation. Just intent.</p>
         </section>
 
         <section>
-          <h2>Problem</h2>
+          <h2>The Attention Tax</h2>
+          <p>The modern web is built to <strong>hijack</strong>, not to help.</p>
           <ul>
-            <li>Search apps and feeds are optimized for attention, not intent.</li>
-            <li>Simple tasks get mixed with ads, thumbnails, clickbait, and distractions.</li>
-            <li>Suggested content can be irrelevant or spiritually unhealthy.</li>
+            <li><strong>The "Quick Task" Trap:</strong> You go to find a recipe; you leave 40 minutes later after 3 political rants and an ad for shoes.</li>
+            <li><strong>Algorithmic Pollution:</strong> Feeds optimized for "engagement" (outrage) rather than "utility" (peace).</li>
+            <li><strong>Digital Friction:</strong> 90% of a webpage is now ads, trackers, and "Suggested for You."</li>
           </ul>
         </section>
 
         <section>
-          <h2>What Curio Is</h2>
+          <h2>Vending Machine vs. Supermarket</h2>
+          <div class="highlight-box">
+            "The Browser is a 100-acre supermarket where you have to walk past the candy aisle just to find the milk."
+          </div>
+          <p><strong>Curio is the Vending Machine:</strong> You tell it exactly what you want. It gives you the item. You leave. No distractions in between.</p>
+        </section>
+
+        <section>
+          <h2>The Curation Layer</h2>
+          <p>Curio sits <em>above</em> the noise as a terminal-based interface.</p>
           <ul>
-            <li>Terminal-based, browserless content discovery software.</li>
-            <li>Text-only results for calm, practical decision-making.</li>
-            <li>AI curation plus hard-code filters to remove inappropriate content.</li>
-            <li>User-defined wholesomeness level to tighten output quality.</li>
+            <li><strong>Browserless:</strong> It fetches data, not pixels. No ads can render in a terminal.</li>
+            <li><strong>Spiritually Healthy:</strong> AI-driven "Wholesomeness Filters" strip out clickbait and rage-bait.</li>
+            <li><strong>Text-First:</strong> Low-stimulation results for high-clarity decisions.</li>
           </ul>
         </section>
 
         <section>
-          <h2>Core Rules</h2>
-          <ul>
-            <li>Curio is not a browser.</li>
-            <li>There is no exploration, only intentional access.</li>
-            <li>All outputs are curated before they are shown.</li>
-            <li>Browser unlock is optional, temporary, and allow-list only.</li>
-          </ul>
-        </section>
-
-        <section>
-          <h2>How Discovery Works</h2>
+          <h2>Intent-Driven Discovery</h2>
           <ol>
-            <li>User runs `discover` with explicit tags.</li>
-            <li>Engine gathers candidates from search + trusted databases.</li>
-            <li>Hard filters remove obvious unsafe/irrelevant matches.</li>
-            <li>AI curator ranks, rewrites, and reduces to a concise final set.</li>
-            <li>Results include relevance score and source trust signals.</li>
+            <li><strong>The Ask:</strong> <code>discover</code> with specific parameters.</li>
+            <li><strong>The Filter:</strong> Candidate results are scrubbed by hard-coded safety logic.</li>
+            <li><strong>The Curator:</strong> AI analyzes results for <strong>truth</strong> and <strong>relevance</strong>, not clicks.</li>
+            <li><strong>The Delivery:</strong> A concise, ranked list with "Trust Signals."</li>
           </ol>
         </section>
 
         <section>
-          <h2>CLI Commands</h2>
-          <pre><code class="language-bash">discover movies --tags "civil war, inspirational, created in 1949"
-discover music --tags "jazz, classic, popular (more than 20,000 records sold), made in 1930"
-discover shopping --tags "hammock, 12 feet or longer, comfortable, outdoors, good reviews"</code></pre>
+          <h2>Precision Search</h2>
+          <p>Stop searching. Start finding.</p>
+          <pre><code class="language-bash"># Find art, not ads
+discover music --tags "1950s, bebop, upbeat, high-fidelity"
+
+# Find tools, not "sponsored content"
+discover shopping --tags "cast iron skillet, made in USA, lifetime warranty"
+
+# Find truth, not hot-takes
+discover research --topic "nuclear fusion progress" --sources "academic, peer-reviewed"</code></pre>
         </section>
 
         <section>
-          <h2>Example Result</h2>
-          <pre><code class="language-text">1. Glory
-Tags: war, sacrifice, honor, leadership
-Score: 0.92
-Description: A story of courage and unity...
-Created by: Warner Bros
-Directed by: ...
-Starring: [...]
-Where to watch: Amazon Prime, Hulu, Netflix
-Sources:
-- (A) Read about it (trust 4/10)
-- (B) Buy or stream (trust 9/10)</code></pre>
+          <h2>Calm Information</h2>
+          <pre><code class="language-text">Result: Lodge 12-inch Skillet
+Relevance: 98% | Wholesomeness: 10/10
+--------------------------------------------------
+Summary: Heavy-duty, pre-seasoned, heirloom quality.
+Trust Signal: High (Consistent reviews over 20 years)
+Price: $39.90
+Action: [A] Purchase Link (Direct) | [B] Read Manual</code></pre>
         </section>
 
         <section>
-          <h2>Use Cases</h2>
+          <h2>The Guardrails</h2>
           <ul>
-            <li>Physical products and local places using search + map sources.</li>
-            <li>General research and learning across trusted knowledge sources.</li>
-            <li>Entertainment discovery across movies, music, books, podcasts, games, and software.</li>
-            <li>Future integration with decentralized social updates from trusted people.</li>
+            <li><strong>Wholesomeness Tiers:</strong> You define the "noise floor" (e.g., G, PG, PG-13).</li>
+            <li><strong>Sandboxed Access:</strong> If a browser is needed, it opens a "Single-Use Tab" that expires in 5 minutes.</li>
+            <li><strong>Domain Allow-listing:</strong> Only sources the Curator trusts can be opened.</li>
           </ul>
         </section>
 
         <section>
-          <h2>Safety and Trust</h2>
-          <ul>
-            <li>Hard-coded prompt guardrails for curation behavior.</li>
-            <li>User wholesomeness tier controls strictness.</li>
-            <li>Blacklist + user feedback loops for ongoing filtering.</li>
-            <li>Source trust score reflects reliability + model confidence.</li>
-            <li>Web blocker allows only AI-approved domains for limited time.</li>
-          </ul>
+          <h2>A New Class of Software</h2>
+          <p>We aren't competing with Chrome. We are competing with <strong>Time Waste</strong>.</p>
+          <div class="highlight-box">
+            Curio is for the "Deep Work" professional, the intentional parent, and the digitally exhausted.
+          </div>
         </section>
 
-        <section>
-          <h2>Business Position</h2>
-          <ul>
-            <li>Curio is a new access layer for the internet, not a replacement tab.</li>
-            <li>It targets users who want peace, relevance, and productivity.</li>
-            <li>It creates a defensible trust and safety experience around intent-first search.</li>
-          </ul>
+        <section data-background-color="#0f5a7a">
+          <h1 style="color: white;">Take Back the Web</h1>
+          <p class="tagline" style="color: #a8ddec;">Less Noise. More Life.</p>
+          <p style="color: white;">Curio: The internet, curated for humans, not for algorithms.</p>
         </section>
 
-        <section>
-          <h2>Roadmap</h2>
-          <ul>
-            <li>Phase 1: discover engine + filtering + AI curation + trust score.</li>
-            <li>Phase 2: browser blocker and temporary destination controls.</li>
-            <li>Phase 3: broader source adapters and preference learning.</li>
-            <li>Phase 4: trusted social-layer integrations.</li>
-          </ul>
-        </section>
-
-        <section>
-          <h2>Closing</h2>
-          <p class="tagline">Intentional internet use at command-line speed.</p>
-          <p>Less noise. Less temptation. Better decisions.</p>
-        </section>
       </div>
     </div>
 
     <script src="../../vendor/reveal.js/dist/reveal.js"></script>
-    <script src="../../vendor/reveal.js/plugin/notes/notes.js"></script>
-    <script src="../../vendor/reveal.js/plugin/markdown/markdown.js"></script>
     <script src="../../vendor/reveal.js/plugin/highlight/highlight.js"></script>
     <script>
       Reveal.initialize({
         hash: true,
-        slideNumber: true,
-        transition: "slide",
-        plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+        slideNumber: 'c/t',
+        transition: "convex",
+        plugins: [RevealHighlight]
       });
     </script>
   </body>
