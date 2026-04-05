@@ -1,0 +1,160 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+CURIO_ROOT="$(CDPATH= cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+
+# shellcheck source=lib/common.sh
+source "$CURIO_ROOT/lib/common.sh"
+# shellcheck source=lib/config.sh
+source "$CURIO_ROOT/lib/config.sh"
+# shellcheck source=lib/session.sh
+source "$CURIO_ROOT/lib/session.sh"
+# shellcheck source=providers/movies.sh
+source "$CURIO_ROOT/providers/movies.sh"
+# shellcheck source=lib/ai.sh
+source "$CURIO_ROOT/lib/ai.sh"
+# shellcheck source=lib/browser.sh
+source "$CURIO_ROOT/lib/browser.sh"
+
+show_help() {
+  cat <<'EOF'
+Curio
+
+Usage:
+  curio init
+  curio discover movies --tags "civil war, inspirational"
+  curio ask 1 "Is this appropriate for a family movie night?"
+  curio open 1 A
+  curio show
+  curio help
+
+After running a discover command, Curio enters an interactive session and accepts:
+  discover movies --tags "..."
+  ask <result-number> "<question>"
+  open <result-number> <link-label>
+  show
+  help
+  quit
+EOF
+}
+
+handle_discover() {
+  local category="${1:-}"
+  shift || true
+
+  case "$category" in
+    movies)
+      curio_discover_movies "$@"
+      ;;
+    *)
+      curio_die "Unsupported category: ${category:-<empty>}. MVP currently supports: movies"
+      ;;
+  esac
+}
+
+handle_ask() {
+  local result_index="${1:-}"
+  local question="${2:-}"
+  [[ -n "$result_index" ]] || curio_die "Usage: curio ask <result-number> \"<question>\""
+  [[ -n "$question" ]] || curio_die "Usage: curio ask <result-number> \"<question>\""
+  curio_ai_answer_about_result "$result_index" "$question"
+}
+
+handle_open() {
+  local result_index="${1:-}"
+  local link_label="${2:-}"
+  [[ -n "$result_index" ]] || curio_die "Usage: curio open <result-number> <link-label>"
+  [[ -n "$link_label" ]] || curio_die "Usage: curio open <result-number> <link-label>"
+  curio_open_result_link "$result_index" "$link_label"
+}
+
+run_interactive_session() {
+  local line
+
+  curio_note "Interactive session started. Type 'help' for commands or 'quit' to exit."
+  while true; do
+    printf 'curio> '
+    IFS= read -r line || break
+    [[ -n "${line// }" ]] || continue
+
+    if [[ "$line" == "quit" || "$line" == "exit" ]]; then
+      break
+    fi
+    if [[ "$line" == "help" ]]; then
+      show_help
+      continue
+    fi
+
+    local parsed_json
+    parsed_json="$(curio_parse_shell_words "$line")" || {
+      curio_warn "Could not parse input."
+      continue
+    }
+
+    local -a argv=()
+    while IFS= read -r arg; do
+      argv+=("$arg")
+    done < <(jq -r '.[]' <<<"$parsed_json")
+
+    local command="${argv[0]:-}"
+    unset 'argv[0]'
+
+    case "$command" in
+      discover)
+        handle_discover "${argv[@]}"
+        ;;
+      ask)
+        handle_ask "${argv[@]}"
+        ;;
+      open)
+        handle_open "${argv[@]}"
+        ;;
+      show)
+        curio_show_results
+        ;;
+      *)
+        curio_warn "Unknown command: $command"
+        ;;
+    esac
+  done
+}
+
+main() {
+  curio_require_command curl
+  curio_require_command jq
+  curio_require_command python3
+
+  curio_load_config
+  curio_session_init
+
+  local command="${1:-help}"
+  shift || true
+
+  case "$command" in
+    init)
+      curio_init_config_if_missing
+      curio_note "Config ready at $CURIO_CONFIG_PATH"
+      ;;
+    discover)
+      handle_discover "$@"
+      run_interactive_session
+      ;;
+    ask)
+      handle_ask "$@"
+      ;;
+    open)
+      handle_open "$@"
+      ;;
+    show)
+      curio_show_results
+      ;;
+    help|-h|--help)
+      show_help
+      ;;
+    *)
+      curio_die "Unknown command: $command"
+      ;;
+  esac
+}
+
+main "$@"
